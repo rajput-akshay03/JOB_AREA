@@ -1,0 +1,11 @@
+const express=require("express");
+const { getAllJobs, postJob, getmyJobs, updateJob, deleteJob, getSingleJob } = require("../controllers/jobController");
+const { isAuthorized } = require("../middlewares/auth");
+const router=express.Router();
+router.get("/getAll",getAllJobs);
+router.post("/post",isAuthorized,postJob);
+router.get("/getmyJobs",isAuthorized,getmyJobs);
+router.put("/update/:id",isAuthorized,updateJob);
+router.delete("/delete/:id",isAuthorized,deleteJob);
+router.get("/:id",isAuthorized,getSingleJob);
+module.exports=router;
