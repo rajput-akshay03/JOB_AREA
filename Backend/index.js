@@ -34,5 +34,5 @@ app.use("/api/v1/application",applicationRoutes);
 app.use("/api/v1/job",jobRoutes);
 app.use(errorMiddleware);
 app.listen(port,()=>{
-    console.log(`jai rajputana ${port}`);
+    console.log(`running ${port}`);
 })
