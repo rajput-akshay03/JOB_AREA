@@ -3,8 +3,8 @@ const { errorHandler } = require("./error");
 const jwt=require("jsonwebtoken");
 const User = require("../models/userSchema");
 const isAuthorized= catchAsyncError(async(req,res,next)=>{
-      const { token } = await req.cookies;
-      console.log(req);
+      const { token } = req.cookies;
+      console.log(req.cookies);
       console.log('fjhf');
       if (!token) {
         return next(new errorHandler("User Not Authorized", 401));
