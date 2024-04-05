@@ -17,7 +17,7 @@ app.use(cors({
     // origin:[process.env.FRONTEND_URL],
     // methods:["GET","POST","DELETE","PUT"],
     // credentials:true
-    origin:'http://localhost:5173', 
+    origin:'https://job-area-nine.vercel.app/', 
     credentials:true,            //access-control-allow-credentials:true
     optionSuccessStatus:200
 }));
