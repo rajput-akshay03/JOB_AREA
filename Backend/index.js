@@ -17,7 +17,7 @@ app.use(cors({
     // origin:[process.env.FRONTEND_URL],
     // methods:["GET","POST","DELETE","PUT"],
     // credentials:true
-    origin:'https://job-area-nine.vercel.app/', 
+    origin:'https://job-area-nine.vercel.app', 
     credentials:true,            //access-control-allow-credentials:true
     optionSuccessStatus:200
 }));
