@@ -24,10 +24,10 @@ const MyApplications = () => {
             withCredentials: true,
           })
           .then((res) => {
-          
             setApplications(res.data.applications);
           });
       } else {
+        console.log(`user is ${user.role}`);
         axios
           .get(`${import.meta.env.VITE_frontend_url}/api/v1/application/jobseeker/getall`, {
             withCredentials: true,
@@ -82,41 +82,45 @@ const MyApplications = () => {
       {user && user.role === "Job Seeker" ? (
         <div className="container">
           <h1>My Applications</h1>
-          {applications.length <= 0 ? (
-            <>
-              {" "}
-              <h4>No Applications Found</h4>{" "}
-            </>
-          ) : (
-            applications.map((element) => {
-              return (
-                <JobSeekerCard
-                  element={element}
-                  key={element._id}
-                  deleteApplication={deleteApplication}
-                  openModal={openModal}
-                />
-              );
-            })
-          )}
+          {
+             (applications && applications.length) > 0 ? (
+              applications.map((element) => {
+                return (
+                  <JobSeekerCard
+                    element={element}
+                    key={element._id}
+                    deleteApplication={deleteApplication}
+                    openModal={openModal}
+                  />
+                );        
+              }
+              )
+            ) : (
+              <>
+                {" "}
+                <h4>No Applications Found</h4>{" "}
+              </>         
+            )
+         }
         </div>
       ) : (
         <div className="container">
           <h1>Applications From Job Seekers</h1>
-          {applications.length <= 0 ? (
+          {
+          (applications && applications.length>0) ? (
+              applications.map((element) => {
+                return (
+                  <EmployerCard
+                    element={element}
+                    key={element._id}
+                    openModal={openModal}
+                  />
+                )
+              })
+          ) : (
             <>
               <h4>No Applications Found</h4>
             </>
-          ) : (
-            applications.map((element) => {
-              return (
-                <EmployerCard
-                  element={element}
-                  key={element._id}
-                  openModal={openModal}
-                />
-              );
-            })
           )}
         </div>
       )}

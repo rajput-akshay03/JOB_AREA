@@ -17,23 +17,29 @@ import PostJob from "./components/Job/PostJob";
 import NotFound from "./components/NotFound/NotFound";
 import MyJobs from "./components/Job/MyJobs";
 function App() {
-  const { isAuthorized, setIsAuthorized, setUser } = useContext(Context);
+  const { isAuthorized, setIsAuthorized,user, setUser } = useContext(Context);
   console.log(`isAuthorized is ${isAuthorized}`);
   useEffect(() => {
     const fetchUser = async () => {
       try {
+        console.log(import.meta.env.VITE_frontend_url);
         const response = await axios.get(
           `${import.meta.env.VITE_frontend_url}/api/v1/user/getuser`,
           {
             withCredentials: true,
           }
-          );
-          console.log(`resp is ${response}`);
-        if(response.data.success)
-           { 
-             setUser(response.data.user);
-             setIsAuthorized(true);
-           }
+          )
+          .then((resp)=>{
+            console.log(" aks");
+        console.log(isAuthorized);
+            console.log(resp);
+            if(resp.data.success)
+              { 
+                setUser(resp.data.user);
+                setIsAuthorized(true);
+              }
+          })
+           
       } catch (error) {
         console.log(error);
         setIsAuthorized(false);
