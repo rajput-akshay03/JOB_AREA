@@ -13,15 +13,15 @@ cloudinary.cloudinaryconnect();
 const port=process.env.PORT;
 const cors=require("cors");
 dbConnection();
-// app.use(cors({
-//     // origin:[process.env.FRONTEND_URL],
-//     // methods:["GET","POST","DELETE","PUT"],
-//     // credentials:true
-//     origin:'http://localhost:5173', 
-//     credentials:true,            //access-control-allow-credentials:true
-//     optionSuccessStatus:200
-// }));
-app.use(cors());
+app.use(cors({
+    // origin:[process.env.FRONTEND_URL],
+    // methods:["GET","POST","DELETE","PUT"],
+    // credentials:true
+    origin:'http://localhost:5173', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+}));
+// app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
