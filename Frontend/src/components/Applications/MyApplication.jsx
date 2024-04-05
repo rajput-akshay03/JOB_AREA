@@ -4,7 +4,8 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import ResumeModal from "./ResumeModel";
-import './css/MyApplication.css'
+import './css/MyApplication.css';
+
 const MyApplications = () => {
   const { user } = useContext(Context);
   const [applications, setApplications] = useState([]);
@@ -14,11 +15,12 @@ const MyApplications = () => {
   const { isAuthorized } = useContext(Context);
   const navigateTo = useNavigate();
 
+  console.log(import.meta.env.VITE_frontend_url);
   useEffect(() => {
     try {
       if (user && user.role === "Employer") {
         axios
-          .get("http://localhost:4000/api/v1/application/employer/getall", {
+          .get(`${import.meta.env.VITE_frontend_url}/api/v1/application/employer/getall`, {
             withCredentials: true,
           })
           .then((res) => {
@@ -27,7 +29,7 @@ const MyApplications = () => {
           });
       } else {
         axios
-          .get("http://localhost:4000/api/v1/application/jobseeker/getall", {
+          .get(`${import.meta.env.VITE_frontend_url}/api/v1/application/jobseeker/getall`, {
             withCredentials: true,
           })
           .then((res) => {
@@ -46,7 +48,7 @@ const MyApplications = () => {
   const deleteApplication = (id) => {
     try {
       axios
-        .delete(`http://localhost:4000/api/v1/application/delete/${id}`, {
+        .delete(`${import.meta.env.VITE_frontend_url}/api/v1/application/delete/${id}`, {
           withCredentials: true,
         })
         .then((res) => {

@@ -22,7 +22,7 @@ const Register = () => {
     try {
       console.log("aksha111y");
       const { data } = await axios.post(
-        "http://localhost:4000/api/v1/user/register",
+        `${import.meta.env.VITE_frontend_url}/api/v1/user/register`,
         { name, phone, email, role, password },
         {
           headers: {

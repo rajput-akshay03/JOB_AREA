@@ -23,12 +23,12 @@ function App() {
     const fetchUser = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:4000/api/v1/user/getuser",
+          `${import.meta.env.VITE_frontend_url}/api/v1/user/getuser`,
           {
             withCredentials: true,
           }
           );
-          console.log(response);
+          console.log(`resp is ${response}`);
         if(response.data.success)
            { 
              setUser(response.data.user);

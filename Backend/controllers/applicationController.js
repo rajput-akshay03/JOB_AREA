@@ -37,6 +37,7 @@ exports.jobSeekerDeleteApplication= catchAsyncError(async(req,res,next)=>{
       return next(new errorHandler("Employer can not delete the application",400));
     }
     const {id} = req.params;
+    console.log(id);
     const application = await Application.findById(id);
     if(!application)
           return next(new errorHandler("application is not found",400));

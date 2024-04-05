@@ -34,7 +34,7 @@ const Application = () => {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:4000/api/v1/application/post",
+        `${import.meta.env.VITE_frontend_url}/api/v1/application/post`,
         formData,
         {
           withCredentials: true,

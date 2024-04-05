@@ -8,12 +8,12 @@ import { GiHamburgerMenu } from "react-icons/gi";
 const Navbar = () => {
   const [show, setShow] = useState(false);
   const { isAuthorized, setIsAuthorized, user } = useContext(Context);
+  console.log(`navbar is ${user}`);
   const navigateTo = useNavigate();
-
   const handleLogout = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:4000/api/v1/user/logout",
+        `${import.meta.env.VITE_frontend_url}/api/v1/user/logout`,
         {
           withCredentials: true,
         }
@@ -50,12 +50,12 @@ const Navbar = () => {
           </li>
           <li>
             <Link to={"/applications/me"} onClick={() => setShow(false)}>
-              {user && user.role === "Employer"
+              {user? (user.role === "Employer"
                 ? "APPLICANT'S APPLICATIONS"
-                : "MY APPLICATIONS"}
+                : "MY APPLICATIONS"):<div></div>}
             </Link>
           </li>
-          {user && user.role === "Employer" ? (
+          {user? (user.role === "Employer" ? (
             <>
               <li>
                 <Link to={"/job/post"} onClick={() => setShow(false)}>
@@ -70,7 +70,7 @@ const Navbar = () => {
             </>
           ) : (
             <></>
-          )}
+          )):<div></div>}
 
           <button onClick={handleLogout}>LOGOUT</button>
         </ul>
