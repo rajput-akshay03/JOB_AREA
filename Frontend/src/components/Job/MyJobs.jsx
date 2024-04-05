@@ -18,7 +18,11 @@ const MyJobs = () => {
       try {
         const {data}  = await axios.get(
           `${import.meta.env.VITE_frontend_url}/api/v1/job/getmyjobs`,
-          { withCredentials: true }
+          { withCredentials: true ,
+            headers: { 
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            }
+          }
         );
         setMyJobs(data.myJobs);
       } catch (error) {
@@ -49,6 +53,9 @@ const MyJobs = () => {
     await axios
       .put(`${import.meta.env.VITE_frontend_url}/api/v1/job/update/${jobId}`, updatedJob, {
         withCredentials: true,
+        headers: { 
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        }
       })
       .then((res) => {
         if(res.data.success)
@@ -69,6 +76,9 @@ const MyJobs = () => {
     await axios
       .delete(`${import.meta.env.VITE_frontend_url}/api/v1/job/delete/${jobId}`, {
         withCredentials: true,
+        headers: { 
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        }
       })
       .then((res) => {
         if(res.data.success)

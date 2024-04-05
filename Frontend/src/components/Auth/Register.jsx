@@ -25,8 +25,8 @@ const Register = () => {
         `${import.meta.env.VITE_frontend_url}/api/v1/user/register`,
         { name, phone, email, role, password },
         {
-          headers: {
-            "Content-Type": "application/json",
+          headers: { 
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
           withCredentials: true,
         }
@@ -34,6 +34,7 @@ const Register = () => {
       if(data.success)
       { 
       toast.success(data.message);
+      localStorage.setItem("token",data.token);
       setName("");
       setEmail("");
       setPassword("");

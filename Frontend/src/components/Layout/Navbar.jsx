@@ -16,11 +16,15 @@ const Navbar = () => {
         `${import.meta.env.VITE_frontend_url}/api/v1/user/logout`,
         {
           withCredentials: true,
+          headers: { 
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          }
         }
       );
       if(response.data.success)
       {
         toast.success(response.data.message);
+        localStorage.removeItem("token");
         setIsAuthorized(false);
         navigateTo("/login");
       }

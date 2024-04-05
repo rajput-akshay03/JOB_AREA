@@ -21,7 +21,9 @@ const MyApplications = () => {
       if (user && user.role === "Employer") {
         axios
           .get(`${import.meta.env.VITE_frontend_url}/api/v1/application/employer/getall`, {
-            withCredentials: true,
+            headers: { 
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            }
           })
           .then((res) => {
             setApplications(res.data.applications);
@@ -30,7 +32,9 @@ const MyApplications = () => {
         console.log(`user is ${user.role}`);
         axios
           .get(`${import.meta.env.VITE_frontend_url}/api/v1/application/jobseeker/getall`, {
-            withCredentials: true,
+            headers: { 
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            }
           })
           .then((res) => {
             setApplications(res.data.applications);
@@ -49,7 +53,9 @@ const MyApplications = () => {
     try {
       axios
         .delete(`${import.meta.env.VITE_frontend_url}/api/v1/application/delete/${id}`, {
-          withCredentials: true,
+          headers: { 
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          }
         })
         .then((res) => {
           if(res.data.success)

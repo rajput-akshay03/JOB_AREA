@@ -15,6 +15,9 @@ const JobDetails = () => {
     axios
       .get(`${import.meta.env.VITE_frontend_url}/api/v1/job/${id}`, {
         withCredentials: true,
+        headers: { 
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        }
       })
       .then((res) => {
         setJob(res.data.job);

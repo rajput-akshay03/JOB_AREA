@@ -22,8 +22,8 @@ const Login = () => {
         `${import.meta.env.VITE_frontend_url}/api/v1/user/login`,
         { email, password, role },
         {
-          headers: {
-            "Content-Type": "application/json",
+          headers: { 
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
           withCredentials: true,
         }
@@ -31,6 +31,8 @@ const Login = () => {
       if(data.success)
       {
         toast.success(data.message);
+        
+        localStorage.setItem("token",data.token);
         setEmail("");
         setPassword("");
         setRole("");

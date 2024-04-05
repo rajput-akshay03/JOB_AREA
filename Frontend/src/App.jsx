@@ -23,14 +23,18 @@ function App() {
     const fetchUser = async () => {
       try {
         console.log(import.meta.env.VITE_frontend_url);
+       
+        const token =localStorage.getItem("token");
         const response = await axios.get(
           `${import.meta.env.VITE_frontend_url}/api/v1/user/getuser`,
           {
-            withCredentials: true,
-          }
+            headers: { 
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            }
+          }  
           )
           .then((resp)=>{
-            console.log(" aks");
+            console.log(" aks");                  
         console.log(isAuthorized);
             console.log(resp);
             if(resp.data.success)
